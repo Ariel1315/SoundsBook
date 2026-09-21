@@ -688,7 +688,39 @@ footer {
 
     .slogan .linha {
         grid-template-columns: 1fr;
-        gap: 32px;
+        gap: 28px;
+        width: 100%;
+    }
+
+    .slogan {
+      padding: 130px 0 70px;
+    }
+
+    .linha {
+      width: 90%;
+    }
+
+    .desc {
+      max-width: 100%;
+    }
+
+    .numeros {
+      flex-direction: column;
+      gap: 22px;
+      margin-top: 45px;
+    }
+
+    .numeros div {
+      width: 100%;
+    }
+
+    .botoes {
+      flex-direction: column;
+    }
+
+    .botoes .btn {
+      width: 100%;
+      justify-content: center;
     }
 
     .tres {
@@ -744,8 +776,18 @@ footer {
     .foot-grid {
     grid-template-columns: 1fr;
   }
-    
+
   .ler {
     padding: 4px 9px;
   }
+
+  .numeros {
+    flex-direction: column;
+    gap: 22px;
+}
+
+.numeros div {
+    width: 100%;
+}
+
 }
