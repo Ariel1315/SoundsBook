@@ -744,4 +744,8 @@ footer {
     .foot-grid {
     grid-template-columns: 1fr;
   }
+    
+  .ler {
+    padding: 4px 9px;
+  }
 }
