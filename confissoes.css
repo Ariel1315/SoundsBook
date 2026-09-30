@@ -1,0 +1,501 @@
+@charset 'UTF-8';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #EAE2CE;
+    color: #1B1f27;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: rgba(234, 226, 206, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 32px;
+    max-width: 1160px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.45rem;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1B1f27;
+}
+
+.logo_icone {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 18px;
+}
+
+.logo_icone span {
+    width: 3px;
+    background: #c97f1e;
+    border-radius: 1px;
+}
+
+.ler {
+    background: #1b1f27;
+    color: #EAE2CE;
+    padding: 10px 22px;
+    border-radius: 4px;
+    font-weight: bold;
+    border: 1px solid #1b1f27;
+}
+
+.ler:hover {
+    background: transparent;
+    color: #1b1f27;
+    font-weight: normal;
+    transition: all 0.3s ease-in-out;
+}
+
+.menu {
+    display: flex;
+    gap: 36px;
+    font-size: 0.94rem;
+    font-weight: 500;
+}
+
+.menu a {
+    position: relative;
+    padding: 4px 0;
+    color: #1B1f27;
+}
+
+.menu a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1.5px;
+    background-color: #c97f1e;
+    transition: width 0.3s ease;
+}
+
+.menu a:hover::after {
+    width: 100%;
+}
+
+main {
+    padding-top: 109px;
+}
+
+.pagina_leitura {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 32px 100px;
+}
+
+.trecho_voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: #6B6355;
+    margin-bottom: 22px;
+    transition: color 0.2s ease;
+}
+
+.trecho_voltar:hover {
+    color: #1b1f27;
+}
+
+
+.audios {
+    background: #F2ECDD;
+    border: 1px solid #C9BFA6;
+    border-radius: 4px;
+    padding: 28px 30px;
+    margin-bottom: 28px;
+}
+
+.audios_titulo {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #23514F;
+    margin-bottom: 18px;
+}
+
+.audio_player {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border-top: 1px solid #C9BFA6;
+}
+
+.audio_player:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+
+.audio_botao {
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid #1b1f27;
+    background: transparent;
+    color: #1b1f27;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.audio_botao:hover {
+    background: #1b1f27;
+    color: #EAE2CE;
+}
+
+.audio_icone {
+    display: block;
+    line-height: 1;
+}
+
+.audio_icone_pause {
+    display: none;
+    font-size: 0.78rem;
+    letter-spacing: -1px;
+}
+
+.audio_player.tocando .audio_botao {
+    background: #C97F1E;
+    border-color: #C97F1E;
+    color: #1b1f27;
+}
+
+.audio_player.tocando .audio_icone_play {
+    display: none;
+}
+
+.audio_player.tocando .audio_icone_pause {
+    display: block;
+}
+
+.audio_corpo {
+    flex: 1;
+    min-width: 0;
+}
+
+.audio_cabecalho {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.audio_faixa_nome {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #1b1f27;
+}
+
+.audio_tempo {
+    flex: 0 0 auto;
+    font-size: 0.76rem;
+    font-variant-numeric: tabular-nums;
+    color: #6B6355;
+}
+
+
+.audio_progresso {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 4px;
+    background: linear-gradient(to right, #C97F1E var(--progresso, 0%), #C9BFA6 var(--progresso, 0%));
+    cursor: pointer;
+    outline: none;
+}
+
+.audio_progresso::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #1b1f27;
+    border: 2px solid #F2ECDD;
+    box-shadow: 0 0 0 1px #C97F1E;
+    cursor: pointer;
+    margin-top: 0;
+}
+
+.audio_progresso::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #1b1f27;
+    border: 2px solid #F2ECDD;
+    box-shadow: 0 0 0 1px #C97F1E;
+    cursor: pointer;
+}
+
+.audio_progresso::-moz-range-track {
+    height: 6px;
+    border-radius: 4px;
+    background: transparent;
+}
+
+.audio_ondas {
+    flex: 0 0 auto;
+    display: none;
+    align-items: flex-end;
+    gap: 2px;
+    height: 18px;
+    width: 20px;
+}
+
+.audio_player.tocando .audio_ondas {
+    display: flex;
+}
+
+.audio_ondas span {
+    width: 3px;
+    background: #C97F1E;
+    border-radius: 1px;
+    height: 4px;
+    transform-origin: bottom;
+    animation: onda 0.9s ease-in-out infinite;
+}
+
+.audio_ondas span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.audio_ondas span:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.audio_ondas span:nth-child(4) {
+    animation-delay: 0.45s;
+}
+
+@keyframes onda {
+    0%, 100% {
+        height: 4px;
+    }
+    50% {
+        height: 18px;
+    }
+}
+
+
+.trecho {
+    background: #F2ECDD;
+    border: 1px solid #C9BFA6;
+    border-radius: 4px;
+    padding: 56px 64px;
+    box-shadow: 0 24px 48px -32px rgba(27, 31, 39, 0.35);
+    position: relative;
+    overflow: hidden;
+}
+
+.trecho::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #C97F1E, #E2A33B 45%, #23514F);
+}
+
+.trecho_leitura {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.98rem;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.trecho h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 2.4rem;
+    letter-spacing: -0.01em;
+    text-align: center;
+}
+
+.trecho h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    color: #6B6355;
+    text-align: center;
+    margin-top: 6px;
+}
+
+.trecho_info {
+    display: block;
+    width: fit-content;
+    margin: 20px auto 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #C97F1E;
+    background: rgba(201, 127, 30, 0.14);
+    padding: 5px 14px;
+    border-radius: 20px;
+}
+
+.trecho h4 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #1b1f27;
+    text-align: center;
+    margin-top: 44px;
+    padding-top: 28px;
+    border-top: 1px solid #C9BFA6;
+}
+
+.trecho p {
+    font-family: 'Fraunces', serif;
+    font-size: 1.12rem;
+    line-height: 1.85;
+    color: #1B1f27;
+    text-align: justify;
+    hyphens: auto;
+    margin-top: 22px;
+}
+
+.trecho p:first-of-type {
+    margin-top: 26px;
+}
+
+.versiculo {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    color: #C97F1E;
+    margin-right: 4px;
+}
+
+.trecho_fonte {
+    font-family: 'Inter', sans-serif !important;
+    font-style: italic;
+    font-size: 0.8rem !important;
+    line-height: 1.6 !important;
+    color: #9B9273;
+    text-align: left !important;
+    margin-top: 40px !important;
+    padding-top: 20px;
+    border-top: 1px solid #C9BFA6;
+}
+
+
+@media (max-width: 900px) {
+    .menu {
+        display: none;
+    }
+
+    .trecho {
+        padding: 40px 28px;
+    }
+
+    .trecho h1 {
+        font-size: 1.9rem;
+    }
+}
+
+@media (max-width: 560px) {
+    .pagina_leitura {
+        padding: 0 20px 70px;
+    }
+
+    .audios {
+        padding: 22px 18px;
+    }
+
+    .audio_player {
+        gap: 10px;
+    }
+
+    .audio_botao {
+        width: 38px;
+        height: 38px;
+        font-size: 0.78rem;
+    }
+
+    .audio_faixa_nome {
+        font-size: 0.86rem;
+    }
+
+    .audio_tempo {
+        font-size: 0.7rem;
+    }
+
+    .audio_ondas {
+        display: none !important;
+    }
+
+    .trecho {
+        padding: 32px 20px;
+    }
+
+    .trecho p {
+        text-align: left;
+        hyphens: none;
+    }
+}
+
+@media (max-width: 380px) {
+    .audio_cabecalho {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+    }
+}

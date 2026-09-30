@@ -1,0 +1,270 @@
+@charset 'UTF-8';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #EAE2CE;
+    color: #1B1f27;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: rgba(234, 226, 206, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 32px;
+    max-width: 1160px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.45rem;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1B1f27;
+}
+
+.logo_icone {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 18px;
+}
+
+.logo_icone span {
+    width: 3px;
+    background: #c97f1e;
+    border-radius: 1px;
+}
+
+.ler {
+    background: #1b1f27;
+    color: #EAE2CE;
+    padding: 10px 22px;
+    border-radius: 4px;
+    font-weight: bold;
+    border: 1px solid #1b1f27;
+}
+
+.ler:hover {
+    background: transparent;
+    color: #1b1f27;
+    font-weight: normal;
+    transition: all 0.3s ease-in-out;
+}
+
+.menu {
+    display: flex;
+    gap: 36px;
+    font-size: 0.94rem;
+    font-weight: 500;
+}
+
+.menu a {
+    position: relative;
+    padding: 4px 0;
+    color: #1B1f27;
+}
+
+.menu a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1.5px;
+    background-color: #c97f1e;
+    transition: width 0.3s ease;
+}
+
+.menu a:hover::after {
+    width: 100%;
+}
+
+
+main {
+    padding-top: 96px;
+}
+
+.linha {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+
+.amostra {
+    padding-bottom: 100px;
+}
+
+.amostra_titulo {
+    max-width: 640px;
+    margin-bottom: 48px;
+}
+
+.amostra_texto {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: #23514F;
+    font-size: 1.02rem;
+    margin-bottom: 10px;
+}
+
+.amostra_titulo h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+}
+
+.amostra_texto2 {
+    margin-top: 16px;
+    color: #6B6355;
+    font-size: 1.02rem;
+    line-height: 1.6;
+}
+
+
+.livros_grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.livros {
+    background: #F2ECDD;
+    border: 1px solid #C9BFA6;
+    border-radius: 3px;
+    padding: 28px 26px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+    font-family: 'Fraunces', sans-serif;
+}
+
+.livros a {
+    margin-top: auto !important;
+    width: 100%;
+    padding: 5px 10px !important;
+    display: flex !important;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.livros:hover {
+    border-color: #C97F1E;
+    transform: translateY(-3px);
+}
+
+.livros:active {
+    border-color: #1b1f27;
+    background: #1b1f27;
+    color: #EAE2CE;
+
+}
+
+footer {
+  background: #1e2430;
+  color: #9ba3b4;
+  padding: 64px 0 32px;
+  border-top: 1px solid #3a4150;
+}
+
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: 40px;
+  padding-bottom: 44px;
+  border-bottom: 1px solid #3a4150;
+}
+
+.foot-brand .logo {
+  color: #f3eee0;
+}
+
+.foot-brand p {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  max-width: 32ch;
+}
+
+.foot-col h5 {
+  font-size: 0.82rem;
+  text-transform: none;
+  font-weight: 600;
+  color: #f3eee0;
+  margin-bottom: 14px;
+}
+
+.foot-col li {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.foot-col a:hover {
+  color: #f3eee0;
+}
+
+.foot-bottom {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 26px;
+  font-size: 0.82rem;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media (max-width: 900px) {
+    .liha {
+        padding: 0 20px;
+    }
+
+    .livros_grid {
+        display: flex;
+        flex-flow: column nowrap;
+    }
+
+    .menu {
+        display: none;
+    }
+}
