@@ -267,4 +267,8 @@ footer {
     .menu {
         display: none;
     }
+
+    .foot-grid {
+    grid-template-columns: 1fr;
+  }
 }
