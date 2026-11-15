@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundsBook - Faixas Sonoras</title>
+    <link rel="stylesheet" href="leitura.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="https://ariel1315.github.io/SoundsBook/index.html" class="logo">
+                <span aria-hidden="true" class="logo_icone">
+                    <span style="height: 8px; color: #E2A33B;"></span><span style="height: 8px; color: #E2A33B;"></span><span style="height: 16px; color: #23514F;"></span><span style="height: 8px; color: #E2A33B;"></span><span style="height: 4px; color: #C97F1E;"></span><span style="height: 16px; color: #E2A33B;"></span><span style="height: 8px; color: #E2A33B;"></span><span style="height: 2px; color: #23514F;"></span>
+                </span>
+                SoundsBook
+            </a>
+            <div class="menu">
+                <a href="https://www.instagram.com/sounds.book/" target="_blank" rel="noopener">Instagram</a>
+                <a href="mailto:sunds.book1@gmail.com">E-mail</a>
+                <a href="#artistas">Contato</a>
+            </div>
+            <a href="https://ariel1315.github.io/SoundsBook/index.html" class="ler">Voltar</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="pagina_leitura">
+            <a href="previa.html" class="trecho_voltar">&larr; Voltar aos livros</a>
+
+            <div class="faixas_intro">
+                <p class="faixas_kicker">trilhas sonoras</p>
+                <h1>Já tem sua leitura? Aproveite nossas faixas</h1>
+                <p class="faixas_texto">Abra o livro que você preferir, impresso, digital ou em áudio, escolha uma faixa instrumental e leia com som. Boa leitura!</p>
+            </div>
+
+            <section class="audios" aria-labelledby="audiosTitulo">
+                <div class="audios_cabecalho">
+                    <span class="audios_icone" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
+                    <div>
+                        <h2 class="audios_titulo" id="audiosTitulo">Escolha sua faixa</h2>
+                        <p class="audios_sub">Todas tocam em loop. Uma faixa por vez: ao iniciar outra, a atual pausa sozinha.</p>
+                    </div>
+                </div>
+
+                <div class="audios_grade">
+                    <div class="audio_player">
+                        <button class="audio_botao" type="button" aria-label="Tocar Faixa 01">
+                            <span class="audio_icone audio_icone_play">&#9658;</span>
+                            <span class="audio_icone audio_icone_pause">&#10074;&#10074;</span>
+                        </button>
+                        <div class="audio_texto">
+                            <span class="audio_faixa_nome">Faixa 01</span>
+                            <span class="audio_autor">Autor desconhecido</span>
+                        </div>
+                        <span class="audio_ondas" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+                        <audio class="audio_elemento" loop preload="none">
+                            <source src="faixa1.mp4" type="audio/mp4">
+                            Seu navegador não suporta o elemento de áudio.
+                        </audio>
+                    </div>
+
+                    <div class="audio_player">
+                        <button class="audio_botao" type="button" aria-label="Tocar Faixa 02">
+                            <span class="audio_icone audio_icone_play">&#9658;</span>
+                            <span class="audio_icone audio_icone_pause">&#10074;&#10074;</span>
+                        </button>
+                        <div class="audio_texto">
+                            <span class="audio_faixa_nome">Faixa 02</span>
+                            <span class="audio_autor">Autor desconhecido</span>
+                        </div>
+                        <span class="audio_ondas" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+                        <audio class="audio_elemento" loop preload="none">
+                            <source src="Faixa2.mp4" type="audio/mp4">
+                            Seu navegador não suporta o elemento de áudio.
+                        </audio>
+                    </div>
+
+                    <div class="audio_player">
+                        <button class="audio_botao" type="button" aria-label="Tocar Faixa 03">
+                            <span class="audio_icone audio_icone_play">&#9658;</span>
+                            <span class="audio_icone audio_icone_pause">&#10074;&#10074;</span>
+                        </button>
+                        <div class="audio_texto">
+                            <span class="audio_faixa_nome">Faixa 03</span>
+                            <span class="audio_autor">Criado por - <strong>Jaqueline01</strong></span>
+                        </div>
+                        <span class="audio_ondas" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+                        <audio class="audio_elemento" loop preload="none">
+                            <source src="jaque.mp4" type="audio/mp4">
+                            Seu navegador não suporta o elemento de áudio.
+                        </audio>
+                    </div>
+
+                    <div class="audio_player">
+                        <button class="audio_botao" type="button" aria-label="Tocar Faixa 04">
+                            <span class="audio_icone audio_icone_play">&#9658;</span>
+                            <span class="audio_icone audio_icone_pause">&#10074;&#10074;</span>
+                        </button>
+                        <div class="audio_texto">
+                            <span class="audio_faixa_nome">Faixa 04</span>
+                            <span class="audio_autor">Criado por - <strong>Jesse Gallagher</strong></span>
+                        </div>
+                        <span class="audio_ondas" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+                        <audio class="audio_elemento" loop preload="none">
+                            <source src="Spirit%20of%20Fire%20-%20Jesse%20Gallagher.mp3" type="audio/mpeg">
+                            Seu navegador não suporta o elemento de áudio.
+                        </audio>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="leitura.js" defer></script>
+    <script src="topo.js" defer></script>
+</body>
+</html>
