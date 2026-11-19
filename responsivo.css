@@ -1,0 +1,94 @@
+@charset 'UTF-8';
+
+/* ===================================================================
+   SoundsBook — ajustes de responsividade para a previa.html
+   Carregue DEPOIS de previa.css e cta_faixas.css:
+   <link rel="stylesheet" href="responsivo.css">
+=================================================================== */
+
+/* ---------- rede de segurança contra rolagem lateral ---------- */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img,
+svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* textos longos (e-mails, palavras grandes) quebram em vez de empurrar a página */
+main p,
+main h1,
+main h2,
+main h3,
+main a,
+footer p,
+footer a {
+    overflow-wrap: anywhere;
+}
+
+/* ---------- rodapé ---------- */
+footer .wrap {
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.foot-grid > * {
+    min-width: 0;
+}
+
+.foot-brand p {
+    max-width: 100%;
+}
+
+@media (max-width: 900px) {
+    /* o menu do topo é largo demais para telas pequenas */
+    .menu {
+        display: none;
+    }
+
+    nav {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .foot-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+
+    /* grades de cartões dos livros em uma coluna */
+    main [class*="grid"] {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .ler {
+        padding: 9px 16px;
+        font-size: 0.9rem;
+    }
+
+    .wrap,
+    footer .wrap {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .foot-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .foot-bottom {
+        flex-direction: column;
+        gap: 6px;
+    }
+}
