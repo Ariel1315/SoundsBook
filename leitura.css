@@ -388,6 +388,91 @@ main {
     }
 }
 
+/* ===== FILTRO DE GÊNERO / TEMA ===== */
+.audios_filtro {
+    margin-bottom: 20px;
+}
+
+.audios_filtro_rotulo {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #C97F1E;
+}
+
+.audios_select {
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    width: 100%;
+    max-width: 460px;
+    padding: 13px 46px 13px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.96rem;
+    font-weight: 600;
+    color: #1b1f27;
+    background-color: #EAE2CE;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231b1f27' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 14px;
+    border: 1.5px solid #1b1f27;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+.audios_select:hover {
+    border-color: #C97F1E;
+}
+
+.audios_select:focus-visible {
+    outline: 2px solid #C97F1E;
+    outline-offset: 2px;
+}
+
+/* faixa ainda sem arquivo ("Em breve") */
+.audio_player.indisponivel {
+    opacity: 0.65;
+    cursor: default;
+    border-style: dashed;
+}
+
+.audio_player.indisponivel:hover {
+    border-color: #C9BFA6;
+    transform: none;
+}
+
+.audio_player.indisponivel .audio_botao {
+    border-color: #C9BFA6;
+    color: #9B9273;
+    cursor: not-allowed;
+}
+
+.audio_player.indisponivel:hover .audio_botao {
+    background: transparent;
+    color: #9B9273;
+}
+
+.audio_breve {
+    flex: 0 0 auto;
+    padding: 4px 9px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #23514F;
+    background: rgba(35, 81, 79, 0.12);
+    border-radius: 20px;
+}
+
+.audio_player.erro .audio_autor {
+    color: #B3441F;
+}
+
 /* ===== CARTÃO DO TRECHO ===== */
 .trecho {
     background: #F2ECDD;
@@ -719,6 +804,51 @@ html.escuro .audio_player.tocando .audio_ondas span {
     background: #E2A33B;
 }
 
+/* filtro e faixas indisponíveis (modo escuro) */
+html.escuro .audios_select {
+    color: #EAE2CE;
+    background-color: #171C26;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23EAE2CE' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    border-color: #3A4150;
+}
+
+html.escuro .audios_select:hover {
+    border-color: #E2A33B;
+}
+
+html.escuro .audios_select option,
+html.escuro .audios_select optgroup {
+    background: #1E2430;
+    color: #EAE2CE;
+}
+
+html.escuro .audios_filtro_rotulo {
+    color: #E2A33B;
+}
+
+html.escuro .audio_player.indisponivel:hover {
+    border-color: #3A4150;
+}
+
+html.escuro .audio_player.indisponivel .audio_botao {
+    border-color: #3A4150;
+    color: #6D7587;
+}
+
+html.escuro .audio_player.indisponivel:hover .audio_botao {
+    background: transparent;
+    color: #6D7587;
+}
+
+html.escuro .audio_breve {
+    color: #7FB8B2;
+    background: rgba(127, 184, 178, 0.14);
+}
+
+html.escuro .audio_player.erro .audio_autor {
+    color: #F08A63;
+}
+
 /* trecho do livro */
 html.escuro .trecho {
     background: #1E2430;
@@ -839,5 +969,11 @@ html.escuro .trecho p.trecho_fonte {
         bottom: 16px;
         width: 44px;
         height: 44px;
+    }
+}
+
+@media (max-width: 560px) {
+    .audios_select {
+        max-width: 100%;
     }
 }
