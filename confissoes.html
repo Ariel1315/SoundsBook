@@ -32,80 +32,21 @@
         <div class="pagina_leitura">
             <a href="previa.html" class="trecho_voltar">&larr; Voltar aos livros</a>
 
-            <section class="audios" aria-labelledby="audiosTitulo">
+            <section class="audios" aria-labelledby="audiosTitulo" data-sugerido="espiritualidade">
                 <div class="audios_cabecalho">
                     <span class="audios_icone" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
                     <div>
                         <h2 class="audios_titulo" id="audiosTitulo">Trilhas sonoras para esta leitura</h2>
-                        <p class="audios_sub">Escolha uma faixa e leia com som. Todas tocam em loop.</p>
+                        <p class="audios_sub">Filtre por gênero ou tema, escolha uma faixa e leia com som. Todas tocam em loop.</p>
                     </div>
                 </div>
 
-                <div class="audios_grade">
-                    <div class="audio_player">
-                        <button class="audio_botao" type="button" aria-label="Tocar Faixa 01">
-                            <span class="audio_icone audio_icone_play">&#9658;</span>
-                            <span class="audio_icone audio_icone_pause">&#10074;&#10074;</span>
-                        </button>
-                        <div class="audio_texto">
-                            <span class="audio_faixa_nome">Faixa 01</span>
-                            <span class="audio_autor">Autor desconhecido</span>
-                        </div>
-                        <span class="audio_ondas" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-                        <audio class="audio_elemento" loop preload="none">
-                            <source src="faixa1.mp4" type="audio/mp4">
-                            Seu navegador não suporta o elemento de áudio.
-                        </audio>
-                    </div>
-
-                    <div class="audio_player">
-                        <button class="audio_botao" type="button" aria-label="Tocar Faixa 02">
-                            <span class="audio_icone audio_icone_play">&#9658;</span>
-                            <span class="audio_icone audio_icone_pause">&#10074;&#10074;</span>
-                        </button>
-                        <div class="audio_texto">
-                            <span class="audio_faixa_nome">Faixa 02</span>
-                            <span class="audio_autor">Autor desconhecido</span>
-                        </div>
-                        <span class="audio_ondas" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-                        <audio class="audio_elemento" loop preload="none">
-                            <source src="Faixa2.mp4" type="audio/mp4">
-                            Seu navegador não suporta o elemento de áudio.
-                        </audio>
-                    </div>
-
-                    <div class="audio_player">
-                        <button class="audio_botao" type="button" aria-label="Tocar Faixa 03">
-                            <span class="audio_icone audio_icone_play">&#9658;</span>
-                            <span class="audio_icone audio_icone_pause">&#10074;&#10074;</span>
-                        </button>
-                        <div class="audio_texto">
-                            <span class="audio_faixa_nome">Faixa 03</span>
-                            <span class="audio_autor">Criado por - <strong>Jaqueline01</strong></span>
-                        </div>
-                        <span class="audio_ondas" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-                        <audio class="audio_elemento" loop preload="none">
-                            <source src="jaque.mp4" type="audio/mp4">
-                            Seu navegador não suporta o elemento de áudio.
-                        </audio>
-                    </div>
-
-                    <div class="audio_player">
-                        <button class="audio_botao" type="button" aria-label="Tocar Faixa 04">
-                            <span class="audio_icone audio_icone_play">&#9658;</span>
-                            <span class="audio_icone audio_icone_pause">&#10074;&#10074;</span>
-                        </button>
-                        <div class="audio_texto">
-                            <span class="audio_faixa_nome">Faixa 04</span>
-                            <span class="audio_autor">Criado por - <strong>Jesse Gallagher</strong></span>
-                        </div>
-                        <span class="audio_ondas" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-                        <audio class="audio_elemento" loop preload="none">
-                            <source src="Spirit%20of%20Fire%20-%20Jesse%20Gallagher.mp3" type="audio/mpeg">
-                            Seu navegador não suporta o elemento de áudio.
-                        </audio>
-                    </div>
+                <div class="audios_filtro">
+                    <label class="audios_filtro_rotulo" for="seletorGenero">Gênero ou tema</label>
+                    <select class="audios_select" id="seletorGenero"></select>
                 </div>
+
+                <div class="audios_grade" id="audiosGrade" aria-live="polite"></div>
             </section>
 
             <article class="trecho">
@@ -129,6 +70,7 @@
         </div>
     </main>
 
+    <script src="faixas_dados.js" defer></script>
     <script src="leitura.js" defer></script>
     <script src="topo.js" defer></script>
 </body>
