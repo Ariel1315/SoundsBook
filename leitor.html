@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundsBook - Leitor de PDF</title>
+    <link rel="stylesheet" href="leitor.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        /* aplica o tema salvo antes de a página aparecer (evita piscar) */
+        (function () {
+            try {
+                var p = JSON.parse(localStorage.getItem("sb_leitor_prefs") || "{}");
+                document.documentElement.setAttribute("data-tema", p.tema || "claro");
+            } catch (e) {
+                document.documentElement.setAttribute("data-tema", "claro");
+            }
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="https://ariel1315.github.io/SoundsBook/index.html" class="logo">
+                <span aria-hidden="true" class="logo_icone">
+                    <span style="height: 8px;"></span><span style="height: 8px;"></span><span style="height: 16px;"></span><span style="height: 8px;"></span><span style="height: 4px;"></span><span style="height: 16px;"></span><span style="height: 8px;"></span><span style="height: 2px;"></span>
+                </span>
+                SoundsBook
+            </a>
+            <div class="menu">
+                <a href="previa.html">Livros</a>
+                <a href="faixas.html">Faixas</a>
+            </div>
+            <a href="previa.html" class="ler">Voltar</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ============ TELA INICIAL: envio do PDF e histórico ============ -->
+        <section id="telaInicio" class="inicio">
+            <div class="inicio_wrap">
+                <div class="inicio_topo">
+                    <p class="inicio_kicker">leitor de PDF</p>
+                    <h1>Leia o seu PDF com foco, som e memória</h1>
+                    <p class="inicio_texto">Envie um livro ou documento em PDF e leia na plataforma, com ajustes de aparência, narração em voz alta, anotações e exercícios de estudo.</p>
+                </div>
+
+                <label class="upload" id="zonaUpload" for="arquivoPdf">
+                    <span class="upload_icone" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M5 20h14"/></svg>
+                    </span>
+                    <span class="upload_titulo">Arraste um PDF aqui ou clique para escolher</span>
+                    <span class="upload_sub">O arquivo é processado no seu navegador e não é enviado a nenhum servidor.</span>
+                </label>
+                <input type="file" id="arquivoPdf" accept="application/pdf,.pdf" hidden>
+
+                <div class="processando" id="processando" hidden>
+                    <p id="processandoTexto">Preparando o documento…</p>
+                    <div class="barra_fina"><span id="processandoBarra"></span></div>
+                </div>
+                <p class="erro_upload" id="erroUpload" role="alert" hidden></p>
+
+                <p class="aviso_direitos">Envie apenas arquivos que você tem o direito de ler. O texto extraído fica salvo somente neste navegador e pode ser removido a qualquer momento.</p>
+
+                <div class="resumo_dia" id="resumoDia"></div>
+
+                <div class="historico">
+                    <h2>Seus documentos</h2>
+                    <div class="historico_lista" id="listaDocs"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ TELA DE LEITURA ============ -->
+        <section id="telaLeitura" class="leitura_tela" hidden>
+            <div class="barra_leitor" id="barraLeitor">
+                <button class="btn_barra" id="btnVoltarLista" type="button" aria-label="Voltar à lista de documentos" title="Voltar à lista">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <button class="btn_barra" id="btnCapitulos" type="button" aria-label="Mostrar capítulos" title="Capítulos">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+                </button>
+                <div class="barra_titulo">
+                    <strong id="tituloDoc">Documento</strong>
+                    <span id="subtituloDoc"></span>
+                </div>
+                <div class="barra_abas" role="tablist" aria-label="Ferramentas">
+                    <button class="aba_btn" data-aba="aparencia" type="button" role="tab">Aparência</button>
+                    <button class="aba_btn" data-aba="audio" type="button" role="tab">Áudio</button>
+                    <button class="aba_btn" data-aba="notas" type="button" role="tab">Notas</button>
+                    <button class="aba_btn" data-aba="assistente" type="button" role="tab">Assistente</button>
+                    <button class="aba_btn" data-aba="estudo" type="button" role="tab">Estudar</button>
+                    <button class="aba_btn" data-aba="progresso" type="button" role="tab">Progresso</button>
+                </div>
+                <button class="btn_barra" id="btnFoco" type="button" aria-label="Modo sem distrações" title="Modo sem distrações">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+                </button>
+            </div>
+
+            <div class="leitor_layout" id="leitorLayout">
+                <aside class="lateral lateral_esq" id="painelCapitulos" aria-label="Capítulos">
+                    <h3>Capítulos</h3>
+                    <ol class="lista_cap" id="listaCapitulos"></ol>
+                </aside>
+
+                <article class="area_leitura" id="areaLeitura" tabindex="-1">
+                    <div class="coluna" id="colunaTexto"></div>
+                    <p class="fim_texto" id="fimTexto" hidden>Fim do documento.</p>
+                </article>
+
+                <aside class="lateral lateral_dir" id="painelFerramentas" aria-label="Ferramentas" hidden>
+                    <button class="fechar_painel" id="fecharFerramentas" type="button" aria-label="Fechar painel">&times;</button>
+
+                    <!-- Aparência -->
+                    <div class="aba" data-aba="aparencia" hidden>
+                        <h3>Aparência da leitura</h3>
+
+                        <div class="campo">
+                            <span class="campo_rotulo">Tema</span>
+                            <div class="grupo_btn" id="grupoTema">
+                                <button type="button" data-tema="claro">Claro</button>
+                                <button type="button" data-tema="escuro">Escuro</button>
+                                <button type="button" data-tema="sepia">Sépia</button>
+                            </div>
+                        </div>
+
+                        <div class="campo">
+                            <label class="campo_rotulo" for="selFonte">Fonte</label>
+                            <select id="selFonte" class="seletor">
+                                <option value="serif">Fraunces (serifada)</option>
+                                <option value="sans">Inter (sem serifa)</option>
+                                <option value="classica">Georgia (clássica)</option>
+                                <option value="mono">Monoespaçada</option>
+                            </select>
+                        </div>
+
+                        <div class="campo">
+                            <label class="campo_rotulo" for="rngTamanho">Tamanho do texto <output id="outTamanho"></output></label>
+                            <input type="range" id="rngTamanho" min="14" max="32" step="1">
+                        </div>
+
+                        <div class="campo">
+                            <label class="campo_rotulo" for="rngLinha">Espaço entre linhas <output id="outLinha"></output></label>
+                            <input type="range" id="rngLinha" min="1.3" max="2.6" step="0.05">
+                        </div>
+
+                        <div class="campo">
+                            <label class="campo_rotulo" for="rngParagrafo">Espaço entre parágrafos <output id="outParagrafo"></output></label>
+                            <input type="range" id="rngParagrafo" min="6" max="48" step="2">
+                        </div>
+
+                        <div class="campo">
+                            <label class="campo_rotulo" for="rngLargura">Largura da coluna <output id="outLargura"></output></label>
+                            <input type="range" id="rngLargura" min="420" max="1100" step="20">
+                        </div>
+
+                        <label class="interruptor">
+                            <input type="checkbox" id="chkJustificar">
+                            <span>Justificar o texto</span>
+                        </label>
+                        <label class="interruptor">
+                            <input type="checkbox" id="chkDestaque">
+                            <span>Destacar automaticamente o parágrafo atual</span>
+                        </label>
+
+                        <button class="btn_secundario" id="btnRestaurarAparencia" type="button">Restaurar padrão</button>
+                    </div>
+
+                    <!-- Áudio -->
+                    <div class="aba" data-aba="audio" hidden>
+                        <h3>Leitura em áudio</h3>
+                        <p class="aba_texto">A narração usa as vozes do seu dispositivo. Ela retoma do ponto onde você parou, mesmo depois de fechar a página.</p>
+
+                        <div class="campo">
+                            <label class="campo_rotulo" for="selVoz">Voz</label>
+                            <select id="selVoz" class="seletor"></select>
+                            <p class="campo_nota" id="notaVoz"></p>
+                        </div>
+
+                        <div class="campo">
+                            <label class="campo_rotulo" for="rngVelocidade">Velocidade <output id="outVelocidade"></output></label>
+                            <input type="range" id="rngVelocidade" min="0.5" max="2" step="0.1">
+                        </div>
+
+                        <label class="interruptor">
+                            <input type="checkbox" id="chkAcompanhar">
+                            <span>Rolar a página acompanhando a narração</span>
+                        </label>
+
+                        <div class="campo">
+                            <button class="btn_primario" id="btnOuvirDaqui" type="button">Ouvir a partir do trecho em tela</button>
+                            <button class="btn_secundario" id="btnRetomarAudio" type="button">Retomar de onde parei</button>
+                        </div>
+                    </div>
+
+                    <!-- Notas -->
+                    <div class="aba" data-aba="notas" hidden>
+                        <h3>Anotações</h3>
+                        <p class="aba_texto">Selecione um trecho do texto para grifar, comentar ou guardar como citação.</p>
+                        <div class="linha_botoes">
+                            <button class="btn_secundario" id="btnExportarTxt" type="button">Exportar TXT</button>
+                            <button class="btn_secundario" id="btnExportarPdf" type="button">Exportar PDF</button>
+                        </div>
+                        <div id="listaNotas" class="lista_notas"></div>
+                    </div>
+
+                    <!-- Assistente -->
+                    <div class="aba" data-aba="assistente" hidden>
+                        <h3>Assistente do documento</h3>
+                        <p class="aba_texto">Funciona no seu navegador, sem enviar nada para a internet. Ele localiza e seleciona trechos do próprio texto.</p>
+
+                        <div class="campo">
+                            <label class="campo_rotulo" for="inpBusca">Localizar no documento</label>
+                            <div class="linha_input">
+                                <input type="search" id="inpBusca" class="entrada" placeholder="Palavra ou expressão">
+                                <button class="btn_primario" id="btnBuscar" type="button">Buscar</button>
+                            </div>
+                            <div class="linha_botoes" id="navBusca" hidden>
+                                <button class="btn_mini" id="btnBuscaAnt" type="button">&larr;</button>
+                                <span id="contBusca"></span>
+                                <button class="btn_mini" id="btnBuscaProx" type="button">&rarr;</button>
+                                <button class="btn_mini" id="btnBuscaLimpar" type="button">Limpar</button>
+                            </div>
+                            <div id="resultadosBusca" class="resultados"></div>
+                        </div>
+
+                        <div class="campo">
+                            <label class="campo_rotulo" for="inpPergunta">Perguntar ao documento</label>
+                            <div class="linha_input">
+                                <input type="text" id="inpPergunta" class="entrada" placeholder="Ex.: o que é a amizade?">
+                                <button class="btn_primario" id="btnPerguntar" type="button">Perguntar</button>
+                            </div>
+                            <p class="campo_nota">Mostra os trechos mais relevantes para a sua pergunta. Não escreve respostas novas.</p>
+                            <div id="resultadosPergunta" class="resultados"></div>
+                        </div>
+
+                        <div class="campo">
+                            <label class="campo_rotulo" for="selResumo">Resumo por capítulo</label>
+                            <select id="selResumo" class="seletor"></select>
+                            <button class="btn_secundario" id="btnResumir" type="button">Gerar resumo</button>
+                            <p class="campo_nota">Seleciona as frases mais importantes do capítulo, na ordem em que aparecem.</p>
+                            <div id="resultadoResumo" class="resultados"></div>
+                        </div>
+
+                        <div class="campo bloco_ia">
+                            <span class="campo_rotulo">Explicar e simplificar trechos</span>
+                            <p class="campo_nota">Reescrever ou explicar conceitos exige um serviço de inteligência artificial. Isso ainda não está conectado nesta versão.</p>
+                        </div>
+                    </div>
+
+                    <!-- Estudo -->
+                    <div class="aba" data-aba="estudo" hidden>
+                        <h3>Aprendizagem ativa</h3>
+                        <p class="aba_texto">Os exercícios são criados automaticamente a partir de frases do texto, escondendo uma palavra importante.</p>
+
+                        <div class="campo">
+                            <label class="campo_rotulo" for="selEscopo">Conteúdo</label>
+                            <select id="selEscopo" class="seletor"></select>
+                        </div>
+                        <div class="campo">
+                            <label class="campo_rotulo" for="selQtd">Quantidade</label>
+                            <select id="selQtd" class="seletor">
+                                <option value="5">5 questões</option>
+                                <option value="10" selected>10 questões</option>
+                                <option value="20">20 questões</option>
+                            </select>
+                        </div>
+                        <div class="linha_botoes">
+                            <button class="btn_primario" id="btnFlashcards" type="button">Flashcards</button>
+                            <button class="btn_primario" id="btnQuiz" type="button">Questionário</button>
+                        </div>
+                        <div class="linha_botoes">
+                            <button class="btn_secundario" id="btnRevisar" type="button">Revisar pendências</button>
+                        </div>
+                        <p class="campo_nota" id="notaRevisar"></p>
+
+                        <div id="areaEstudo" class="area_estudo"></div>
+                    </div>
+
+                    <!-- Progresso -->
+                    <div class="aba" data-aba="progresso" hidden>
+                        <h3>Acompanhamento</h3>
+                        <div id="painelProgresso"></div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- barra de áudio -->
+            <div class="barra_audio" id="barraAudio" hidden>
+                <button class="audio_btn" id="audioAnterior" type="button" aria-label="Parágrafo anterior">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zM20 6v12L9.5 12z"/></svg>
+                </button>
+                <button class="audio_btn audio_btn_principal" id="audioPlay" type="button" aria-label="Ouvir">
+                    <svg class="ic_play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="ic_pause" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+                </button>
+                <button class="audio_btn" id="audioProximo" type="button" aria-label="Próximo parágrafo">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM4 6l10.5 6L4 18z"/></svg>
+                </button>
+                <div class="audio_info">
+                    <span id="audioStatus">Pronto para ouvir</span>
+                    <label class="audio_vel">
+                        <span class="sr_only">Velocidade</span>
+                        <select id="audioVelocidade" aria-label="Velocidade da narração">
+                            <option value="0.7">0,7×</option>
+                            <option value="0.85">0,85×</option>
+                            <option value="1">1×</option>
+                            <option value="1.15">1,15×</option>
+                            <option value="1.3">1,3×</option>
+                            <option value="1.5">1,5×</option>
+                            <option value="1.8">1,8×</option>
+                            <option value="2">2×</option>
+                        </select>
+                    </label>
+                </div>
+                <button class="audio_btn" id="audioFechar" type="button" aria-label="Fechar barra de áudio">&times;</button>
+            </div>
+
+            <!-- barra flutuante ao selecionar texto -->
+            <div class="selecao" id="barraSelecao" hidden>
+                <div class="selecao_cores">
+                    <button type="button" data-cor="amarelo" class="cor cor_amarelo" aria-label="Grifar em amarelo"></button>
+                    <button type="button" data-cor="verde" class="cor cor_verde" aria-label="Grifar em verde"></button>
+                    <button type="button" data-cor="azul" class="cor cor_azul" aria-label="Grifar em azul"></button>
+                    <button type="button" data-cor="rosa" class="cor cor_rosa" aria-label="Grifar em rosa"></button>
+                </div>
+                <button type="button" id="selComentar" class="selecao_btn">Comentar</button>
+                <button type="button" id="selCitar" class="selecao_btn">Citar</button>
+                <button type="button" id="selOuvir" class="selecao_btn">Ouvir</button>
+                <div class="selecao_comentario" id="selComentarioBox" hidden>
+                    <textarea id="selComentarioTexto" rows="3" placeholder="Escreva seu comentário"></textarea>
+                    <div class="linha_botoes">
+                        <button type="button" id="selComentarioSalvar" class="btn_primario">Salvar</button>
+                        <button type="button" id="selComentarioCancelar" class="btn_secundario">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+
+            <button class="sair_foco" id="sairFoco" type="button" hidden>Sair do modo foco (Esc)</button>
+            <p class="aviso_flutuante" id="avisoFlutuante" role="status" hidden></p>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="leitor_texto.js"></script>
+    <script src="leitor_dados.js"></script>
+    <script src="leitor.js"></script>
+</body>
+</html>
