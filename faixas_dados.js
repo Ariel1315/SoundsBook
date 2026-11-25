@@ -37,10 +37,12 @@ const GRUPOS = [
    autor: null = "Autor desconhecido" */
 const FAIXAS = [
   /* ---------- em destaque (já disponíveis) ---------- */
-  { grupo: "destaque", titulo: "Faixa 01", autor: null, src: "faixa1.mp4" },
+  { grupo: "destaque", titulo: "Faixa 01", autor: null, src: "desc.mp4" },
   { grupo: "destaque", titulo: "Faixa 02", autor: null, src: "Faixa2.mp4" },
-  { grupo: "destaque", titulo: "Faixa 03", autor: "Jaqueline01", src: "jaque.mp4" },
-  { grupo: "destaque", titulo: "Faixa 04", autor: "Jesse Gallagher", src: "Spirit of Fire - Jesse Gallagher.mp3" },
+  { grupo: "destaque", titulo: "Faixa 03", autor: null, src: "vrum.mp4" },
+  { grupo: "destaque", titulo: "Faixa 04", autor: "Jaqueline01", src: "jaque.mp4" },
+  { grupo: "destaque", titulo: "Faixa 05", autor: "Jesse Gallagher", src: "Spirit of Fire - Jesse Gallagher.mp3" },
+  { grupo: "destaque", titulo: "Faixa 06", autor: "The Soundlings", src: "The Swan - The Soundlings.mp3" },
 
   /* ---------- gêneros literários ---------- */
   { grupo: "romance", titulo: "Romance 01", autor: null, src: "" },
